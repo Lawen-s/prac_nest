@@ -5,8 +5,9 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { BoardRepository } from './board.repository';
 
 @Module({
-  imports:[TypeOrmModule.forFeature([BoardRepository])],
+  // imports:[TypeOrmModule.forFeature([BoardRepository])],
+  imports:[],
   controllers: [BoardsController],
-  providers: [BoardsService]
+  providers: [BoardsService,BoardRepository]
 })
 export class BoardsModule {}
