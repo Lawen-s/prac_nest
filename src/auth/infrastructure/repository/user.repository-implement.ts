@@ -1,6 +1,6 @@
 import { UserRepository } from "src/auth/application/command/user.repository";
 import { User } from "../entity/user.entity";
-import { Injectable } from "@nestjs/common";
+import { ConflictException, Injectable } from "@nestjs/common";
 import { DataSource } from "typeorm";
 
 
@@ -12,6 +12,12 @@ export class UserRepositoryImplement implements UserRepository {
     return await this.db.getRepository(User).findOne({where:{username}})
   }
   async save(user: User): Promise<void> {
-    await this.db.getRepository(User).save(user)
+    try{
+      await this.db.getRepository(User).save(user)
+    }catch(error){
+      if (error.code==='23505'){
+        throw new ConflictException('Already Use User Name')
+      }
+    }
   }
 }

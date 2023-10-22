@@ -11,7 +11,7 @@ export class AuthController {
   }
 
   @Post('')
-  async signUp(@Body() body:SignUpRequestDto){
+  async signUp(@Body() body:SignUpRequestDto): Promise<void>{
     const command = new UserSignUpCommand(
       body.username,
       body.password

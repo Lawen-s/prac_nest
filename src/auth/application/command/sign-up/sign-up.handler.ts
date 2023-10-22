@@ -13,10 +13,10 @@ export class UserSignUpHandler implements ICommandHandler<UserSignUpCommand> {
   @Inject(InjectionToken.USER_REPOSITORY)
   private readonly userRepository: UserRepository;
   async execute(command: UserSignUpCommand): Promise<any> {
-    const existUser = await this.userRepository.findByName(command.username)
-    if (existUser) {
-      throw new NotFoundException(`Can't use username ${command.username}` )
-    }
+    // const existUser = await this.userRepository.findByName(command.username)
+    // if (existUser) {
+    //   throw new NotFoundException(`Can't use username ${command.username}` )
+    // }
     const emptyUser = new User();
     Object.assign(emptyUser,command)
     await this.userRepository.save(emptyUser)
